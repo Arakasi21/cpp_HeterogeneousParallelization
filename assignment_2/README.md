@@ -6,10 +6,8 @@
 
 ## Результаты
 ```
-seed: 1765901311
+seed: 1765910655
 num of elements: 1000000
-time of execution: 0.001420600 seconds
-
-min: 1
-max: 100
+t: 0.001458 sec
+min: 1 max: 100
 ```
