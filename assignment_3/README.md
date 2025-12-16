@@ -4,11 +4,6 @@
 
 Сравнение реализации методов с или без OpenMP
 
-запуск g++ -fopenmp -O2 .\assignment_2\assingment_1_task_2.cpp -o task 
-
-с флагом -fopenmp -o
-и далее 
-
 компиляция:
 C:\Users\araka\Desktop\HetParallel\cpp_HeterogeneousParallelization> g++ -fopenmp -O2 .\assignment_3\assingment_1_task_3.cpp -o .\assignment_3\assignment_1_task_3
 
