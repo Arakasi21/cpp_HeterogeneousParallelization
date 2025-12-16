@@ -13,11 +13,11 @@ int main(){
     srand(time(0)); // инициализируем генератор случайных чисел
     cout << "seed: " << time(0) << endl; // check the seed
     
-    int N = 10000000; // юзаем сто миллионов чтобы разницу увидеть
+    int N = 100000000; // юзаем сто миллионов чтобы разницу увидеть
     int* arr = new int[N]; // init dynamic array. Для выделения динамической памяти используется оператор new
     // динамическая память это куча
     // есть условная static - статическая. Всего есть стэк, статика и динамическая.
-    
+    // В статике разные уровни доступа - вне функции, внутри функции и т.д.
     cout << "num of elements: " << N << endl;
     // заполняем массив случайными числами от 1 до 100
     for(int i = 0; i < N; i++){
@@ -26,42 +26,39 @@ int main(){
     
     // basic without anything
     cout << "\n basic" << endl;
-    int min1 = arr[0];
-    int max1 = arr[0]; 
-    
     // start time
-    auto start1 = high_resolution_clock::now();
     // последовательный цикл
+    // long long 
+    long long sum = 0;
+    auto start1 = high_resolution_clock::now();
     for(int i = 0; i < N; i++){
-        if(arr[i] > max1) max1 = arr[i];
-        if(arr[i] < min1) min1 = arr[i];
+        sum += arr[i];
     }
+    double avr = (double)sum / N; 
     // end time
     auto end1 = high_resolution_clock::now();
+    cout << "sum: " << sum << endl;
+    cout << "average: " << avr << endl;
     duration<double> duration1 = end1 - start1; // вычисляем разницу между концом и началом
-
     cout << "time: " << fixed << setprecision(6) << duration1.count() << " sec" << endl;
-    cout << "min: " << min1 << " max: " << max1 << endl;
-
     // с OpenMP
     cout << "\nOpenMP" << endl;
-    int min2 = arr[0]; // заново инициализируем для чистоты эксперимента
-    int max2 = arr[0];
     
     auto start2 = high_resolution_clock::now();
-    // OpenMP директива для параллельного поиска min и max
+    // OpenMP директива для параллельного вычисления
     // reduction гарантирует что каждый поток будет работать со своей копией переменной
-    // а потом результаты объединятся правильно (для min берется минимальный из всех потоков, для max максимальный)
-    #pragma omp parallel for reduction(min:min2) reduction(max:max2)
+    // long long использую в целом из за предела в int: ~2,147,483,647 когда у нас сумма int: 5,046,941,664, поэтому long long
+    long long sum2 = 0;
+    #pragma omp parallel for reduction(+:sum2)
     for(int i = 0; i < N; i++){
-        if(arr[i] > max2) max2 = arr[i];
-        if(arr[i] < min2) min2 = arr[i];
+        sum2 += arr[i];
     }
+    double avr2 = (double)sum2 / N; 
     auto end2 = high_resolution_clock::now();
     duration<double> duration2 = end2 - start2;
-    
+    cout << "sum: " << sum2 << endl;
+    cout << "average: " << avr2 << endl;
     cout << "time: " << fixed << setprecision(6) << duration2.count() << " sec" << endl;
-    cout << "min: " << min2 << " max: " << max2 << endl;
 
     // на сколько ускорилось?
     cout << "speed: " << fixed << setprecision(2) << duration1.count() / duration2.count() << "x" << endl;
