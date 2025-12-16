@@ -3,7 +3,6 @@
 #include <ctime> // for time()
 #include <cstdlib> // srand rand etc 
 #include <iomanip> // для high resolution clock - setprecision, fixed и т.д.
-#include <omp.h> // для heterogeneous parallelization, использование директив, параллельной обработки
 
 using namespace std; // to not write std:: always
 using namespace std::chrono; // to not write std::chrono always
@@ -21,7 +20,7 @@ int main(){
     cout << "num of elements: " << N << endl;
     // заполняем массив случайными числами от 1 до 100
     for(int i = 0; i < N; i++){
-        arr[i] = rand()%100 + 1; // rand() возвращает число от 0 до RAND_MAX, % 100 дает остаток от деления, +1 сдвигает диапазон до 1-100
+        arr[i] = rand()%100 + 1; // rand() возвращает число от 0 до RAND_MAX(это 32767), % 100 дает остаток от деления, +1 сдвигает диапазон до 1-100
     }
     
     // baseline для сравнения
