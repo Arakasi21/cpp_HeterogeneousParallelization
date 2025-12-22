@@ -1,0 +1,14 @@
+*.out
+*.app
+
+*.o
+*.obj
+
+*.pdb
+*.ilk
+*.idb
+
+.vscode/
+
+build/
+bin/
