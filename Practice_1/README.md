@@ -1,4 +1,4 @@
-## ASSIGNMENT 1 TASK 1
+## PRACTICE 1 TASK 3
 Для начала работы сделал:
 
 1. Скачал vsCode
@@ -9,7 +9,7 @@
 
 4. Написал код - установил расширение Code Runner чтобы не прописывать постоянно PS C:\Users\araka\Desktop\HetParallel\assignment_1> .\assignment_1_task_1.exe после компиляции
 
-5. Таск 1 - все в комментах самого таска. Изучал в основном с https://metanit.com/cpp/tutorial/
+5. Таск 3 - все в комментах самого таска. Изучал в основном с https://metanit.com/cpp/tutorial/
 
 ## Результаты
 ```
