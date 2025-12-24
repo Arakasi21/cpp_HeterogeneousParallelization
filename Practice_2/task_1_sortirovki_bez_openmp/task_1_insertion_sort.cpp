@@ -1,8 +1,10 @@
-// insertion sort
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <iomanip> 
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
 int main(){
     srand(time(0));
     int N = 20;
@@ -24,6 +26,7 @@ int main(){
     // В общем код работает следующим образом: внешний цикл for(int i = 1; i < N; i++) проходит по каждому элементу массива, начиная со второго элемента (индекс 1). 
     // Текущий элемент сохраняется в переменную key, а внутренний цикл while(int j = i - 1; j >= 0 && arr[j] > key; j--) сдвигает элементы отсортированной части массива (слева от текущего элемента) вправо, пока не найдется правильная позиция для key. 
     // Когда правильная позиция найдена, key вставляется на это место.
+    auto start = high_resolution_clock::now();
     for(int i = 1; i < N; i++){
         // текущий элемент для вставки
         int key = arr[i];
@@ -37,13 +40,15 @@ int main(){
         // вставка текущего элемента на его правильную позицию
         arr[j + 1] = key;
     }
-    
+    auto end = high_resolution_clock::now();
+    duration<double> duration = end - start;
     // sorted array
     cout << "Sorted array: ";
     for(int i = 0; i < N; i++){
         cout << arr[i] << " ";
     }
     cout << endl;
+    cout << "Bubble Sort time: " << fixed << setprecision(6) << duration.count() << " sec" << endl;
     
     delete[] arr;
     return 0;
