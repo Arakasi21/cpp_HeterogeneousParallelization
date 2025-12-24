@@ -13,8 +13,10 @@
 
 ## Результаты
 ```
-seed: 1765900042
+seed: 1766586003
 num of elements: 50000
-sum: 2537533
-average: 50.7507
+sum: 2528450
+average: 50.569
 ```
+
+![alt text](image.png)

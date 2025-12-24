@@ -6,8 +6,10 @@
 
 ## Результаты
 ```
-seed: 1765910655
+seed: 1766586027
 num of elements: 1000000
-t: 0.001458 sec
+t: 0.002715 sec
 min: 1 max: 100
 ```
+
+![alt text](image.png)

@@ -11,15 +11,17 @@ C:\Users\araka\Desktop\HetParallel\cpp_HeterogeneousParallelization> g++ -fopenm
 C:\Users\araka\Desktop\HetParallel\cpp_HeterogeneousParallelization> .\assignment_3\assignment_1_task_3.exe
 ## Результаты
 ```
-seed: 1765911575
+seed: 1766586120
 num of elements: 10000000
 
-basic без параллелизации
-time: 0.002383 sec
-min: 1 max: 100
+ basic
+time: 0.003972 sec
+min: 1 max: 100   
 
-OpenMP с параллелизацией
-time: 0.001076 sec
-min: 1 max: 100
-speed: 2.21x
+OpenMP
+time: 0.001994 sec
+min: 1 max: 100   
+speed: 1.99x    
 ```
+
+![alt text](image.png)

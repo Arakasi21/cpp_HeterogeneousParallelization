@@ -11,7 +11,6 @@ using namespace std; // to not write std:: always
 int main(){
     // we use srand to get random seed everytime 
     srand(time(0));
-    
     cout << "seed: " << time(0) << endl; //check the seed
     
     int N = 50000;
@@ -23,7 +22,7 @@ int main(){
     // заполнение массива
     for(int i = 0; i < N; i++){
         arr[i] = rand()%100 + 1; // rand возвращает число от 0 до RAND_MAX (это 0 -> 32767), % 100 дает остаток от деления (0-99), +1 сдвигает диапазон до 1-100
-    }
+    } 
     // обычное вычисление суммы всех элементов массива
     int sum = 0;
     for(int i = 0; i < N; i++){

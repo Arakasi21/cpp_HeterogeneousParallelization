@@ -13,17 +13,19 @@ C:\Users\araka\Desktop\HetParallel\cpp_HeterogeneousParallelization> g++ -fopenm
 C:\Users\araka\Desktop\HetParallel\cpp_HeterogeneousParallelization> .\assignment_4\assignment_1_task_4.exe
 ## Результаты
 ```
-seed: 1765913593
+seed: 1766586183
 num of elements: 100000000
 
-basic
-sum: 5046603760
-average: 50.466
-time: 0.011862 sec
+ basic
+sum: 5046428213
+average: 50.4643
+time: 0.030988 sec
 
 OpenMP
-sum2: 5046603760
-average2: 50.466038
-time: 0.006890 sec
-speed: 1.72x
+sum: 5046428213
+average: 50.464282
+time: 0.017725 sec
+speed: 1.75x
 ```
+
+![alt text](image.png)
