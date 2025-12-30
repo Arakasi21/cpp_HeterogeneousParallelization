@@ -8,19 +8,12 @@ using namespace std;
 using namespace std::chrono;
 int main(){
     srand(time(0));
-    int N = 20;
+    int N = 2000;
     int* arr = new int[N];
-    
+    cout << "num of elements: " << N << endl;
     for(int i = 0; i < N; i++){
         arr[i] = rand()%100 + 1;
     }
-    
-    // just array with random numbers
-    cout << "Initial array: ";
-    for(int i = 0; i < N; i++){
-        cout << arr[i] << " ";
-    }
-    cout << endl;
     
     // selection sort
     // этот код сортирует массив arr из N элементов по возрастанию, т.е. от меньшего к большему.
@@ -46,13 +39,8 @@ int main(){
     }
     auto end = high_resolution_clock::now();
     duration<double> duration = end - start;
-    // sorted array
-    cout << "Sorted array: ";
-    for(int i = 0; i < N; i++){
-        cout << arr[i] << " ";
-    }
     cout << endl;
-    cout << "Bubble Sort time: " << fixed << setprecision(6) << duration.count() << " sec" << endl;
+    cout << "Selection sort time: " << fixed << setprecision(7) << duration.count() << " sec" << endl;
     delete[] arr;
     return 0;
 }
