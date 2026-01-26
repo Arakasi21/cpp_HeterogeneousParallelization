@@ -5,7 +5,7 @@ Master (P0) создаёт массив, раздаёт части через MP
 ![alt text](results.png)
 
 схема
-![alt text](image.png)
+![alt text](schema.png)
 
 Топология Master-Worker (4 узла). 4 этапа: Init → Scatter → Compute → Reduce
 
