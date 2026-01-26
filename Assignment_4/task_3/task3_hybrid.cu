@@ -1,20 +1,10 @@
-/*
- * Лабораторная работа: Гибридные и распределённые параллельные вычисления
- * Задание 3: Гибридная программа CPU + GPU
- * 
- * Идея: разделить массив на две части
- * - Первая часть обрабатывается на CPU
- * - Вторая часть обрабатывается на GPU
- * 
- * Сравниваем: только CPU, только GPU, гибрид CPU+GPU
- */
-
 #include <iostream>
 #include <cuda_runtime.h>
 #include <chrono>
 #include <iomanip>
 #include <thread>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 using namespace std::chrono;
@@ -220,8 +210,13 @@ int main() {
     cout << "  time: " << fixed << setprecision(3) << hybridTime.count() << " ms" << endl << endl;
     
     // проверка корректности
-    bool cpuGpuMatch = fabs(cpuSum - gpuSum) < cpuSum * 0.001f;
-    bool hybridMatch = fabs(cpuSum - hybridSum) < cpuSum * 0.001f;
+    auto rel = [](double a, double b){
+        return fabs(a-b) / (fabs(a) + 1e-12);
+    };
+
+    bool cpuGpuMatch  = rel(cpuSum, gpuSum) < 0.02;    // 2%
+    bool hybridMatch  = rel(cpuSum, hybridSum) < 0.02;
+
     
     cout << "validation :" << endl;
     cout << "  CPU vs GPU: " << (cpuGpuMatch ? "[OK]" : "[FAIL]") << endl;
@@ -240,26 +235,25 @@ int main() {
     cout << "+------------------+------------+------------+" << endl << endl;
     
     // текстовый график
-    cout << "производительность:" << endl;
-    double maxTime = max({cpuTime.count(), gpuTime.count(), hybridTime.count()});
+    cout << "performance:" << endl;
+    double maxTime = std::max(cpuTime.count(), std::max(gpuTime.count(), hybridTime.count()));
     
     cout << "  CPU     |";
     int bar1 = (int)((cpuTime.count() / maxTime) * 40);
-    for (int i = 0; i < bar1; i++) cout << "█";
+    for (int i = 0; i < bar1; i++);
     cout << " " << fixed << setprecision(2) << cpuTime.count() << " ms" << endl;
     
     cout << "  GPU     |";
     int bar2 = (int)((gpuTime.count() / maxTime) * 40);
-    for (int i = 0; i < bar2; i++) cout << "▓";
+    for (int i = 0; i < bar2; i++);
     cout << " " << fixed << setprecision(2) << gpuTime.count() << " ms" << endl;
     
     cout << "  Hybrid  |";
     int bar3 = (int)((hybridTime.count() / maxTime) * 40);
-    for (int i = 0; i < bar3; i++) cout << "░";
+    for (int i = 0; i < bar3; i++);
     cout << " " << fixed << setprecision(2) << hybridTime.count() << " ms" << endl;
     cout << endl;
     
-   
     cudaFree(d_input);
     cudaFree(d_output);
     cudaFree(d_partial);

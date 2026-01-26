@@ -45,9 +45,7 @@ int main(int argc, char** argv) {
     int N = 10000000;  
     
     if (rank == 0) {
-        cout << "========================================" << endl;
         cout << " Distributed calculations MPI" << endl;
-        cout << "========================================" << endl << endl;
         
         cout << "Parameters:" << endl;
         cout << "  Array size: " << N << " elements" << endl;
@@ -68,7 +66,7 @@ int main(int argc, char** argv) {
 
     
     if (rank == 0) {
-        cout << "STAGE 1: Initializing data on master" << endl;
+        cout << "data on master" << endl;
         
         allData = new double[N];
         srand(42); 
@@ -90,7 +88,7 @@ int main(int argc, char** argv) {
     double startTime = MPI_Wtime();  // начало замера времени
     
     if (rank == 0) {
-        cout << "STAGE 2: Distributing data (MPI_Scatter/Send)..." << endl;
+        cout << "MPI_Scatter/Send" << endl;
     }
     
     if (rank == 0) {
@@ -117,12 +115,7 @@ int main(int argc, char** argv) {
     }
     
     double scatterTime = MPI_Wtime();
-    
-    
-    if (rank == 0) {
-        cout << "STAGE 3: Local computations..." << endl;
-    }
-    
+
     // каждый процесс вычисляет сумму квадратов своей части
     double localSum = processLocalData(localData, localSize);
     
@@ -137,7 +130,7 @@ int main(int argc, char** argv) {
     MPI_Barrier(MPI_COMM_WORLD); 
     
     if (rank == 0) {
-        cout << endl << "STAGE 4: Gathering results (MPI_Reduce)..." << endl;
+        cout << endl << "MPI_Reduce" << endl;
     }
     
     double globalSum = 0.0;
@@ -154,9 +147,7 @@ int main(int argc, char** argv) {
     
     if (rank == 0) {
         cout << endl;
-        cout << "========================================" << endl;
         cout << " results" << endl;
-        cout << "========================================" << endl << endl;
         
         cout << "global sum of squares: " << fixed << setprecision(2) 
              << globalSum << endl << endl;
@@ -178,9 +169,7 @@ int main(int argc, char** argv) {
         double computeDuration = computeTime - scatterTime;
         double reduceDuration = endTime - computeTime;
         
-        cout << "========================================" << endl;
         cout << " EXECUTION TIME" << endl;
-        cout << "========================================" << endl << endl;
         
         cout << "+------------------+------------+" << endl;
         cout << "| Stage            | Time (s)   |" << endl;
@@ -205,15 +194,15 @@ int main(int argc, char** argv) {
         int reduceBar = (int)((reduceDuration / maxT) * 40);
         
         cout << "  Scatter |";
-        for (int i = 0; i < scatterBar; i++) cout << "█";
+        for (int i = 0; i < scatterBar; i++);
         cout << " " << fixed << setprecision(4) << scatterDuration * 1000 << " ms" << endl;
         
         cout << "  Compute |";
-        for (int i = 0; i < computeBar; i++) cout << "▓";
+        for (int i = 0; i < computeBar; i++);
         cout << " " << fixed << setprecision(4) << computeDuration * 1000 << " ms" << endl;
         
         cout << "  Reduce  |";
-        for (int i = 0; i < reduceBar; i++) cout << "░";
+        for (int i = 0; i < reduceBar; i++);
         cout << " " << fixed << setprecision(4) << reduceDuration * 1000 << " ms" << endl;
         cout << endl;
         
@@ -225,12 +214,6 @@ int main(int argc, char** argv) {
         cout << "number of processes: " << numProcs << endl;
         cout << "estimated speedup: " << fixed << setprecision(2) << speedup << "x" << endl;
         cout << "efficiency: " << fixed << setprecision(1) << efficiency << "%" << endl << endl;
-        
-        cout << "note: for accurate comparison, run" << endl;
-        cout << "with different numbers of processes:" << endl;
-        cout << "  mpirun -np 2 ./task4_mpi" << endl;
-        cout << "  mpirun -np 4 ./task4_mpi" << endl;
-        cout << "  mpirun -np 8 ./task4_mpi" << endl;
         
         delete[] allData;
     }

@@ -284,12 +284,12 @@ int main() {
     
     cout << "  CPU |";
     int cpuBar = (int)((cpuTime.count() / maxTime) * 40);
-    for (int i = 0; i < cpuBar; i++) cout << "█";
+    for (int i = 0; i < cpuBar; i++);
     cout << " " << fixed << setprecision(2) << cpuTime.count() << " ms" << endl;
     
     cout << "  GPU |";
     int gpuBar = (int)((gpuTimeMs / maxTime) * 40);
-    for (int i = 0; i < gpuBar; i++) cout << "▓";
+    for (int i = 0; i < gpuBar; i++);
     cout << " " << fixed << setprecision(2) << gpuTimeMs << " ms" << endl;
     cout << endl;
 

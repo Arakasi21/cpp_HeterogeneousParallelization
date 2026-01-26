@@ -69,22 +69,15 @@ float finalReduceCPU(float* partialSums, int count) {
 int main() {
     int N = 100000;
     size_t size = N * sizeof(float);
-    
-    cout << "========================================" << endl;
-    cout << " SUM GLOBAL CUDA vs CPU" << endl;
-    cout << "========================================" << endl << endl;
-    
     cout << "config:" << endl;
     cout << "  array size: " << N << " elements" << endl;
     cout << "  memory: " << size / 1024.0 << " KB" << endl << endl;
     
-    // ============ ВЫДЕЛЕНИЕ ПАМЯТИ ============
     
     // память на host (CPU)
     float* h_input = new float[N];      
     float* h_inputCopy = new float[N]; 
     
-    // используем маленькие числа чтобы избежать overflow
     srand(42);  // фиксированный seed для воспроизводимости
     for (int i = 0; i < N; i++) {
         h_input[i] = (float)(rand() % 100) / 10.0f;  // от 0.0 до 10.0
@@ -97,11 +90,8 @@ int main() {
     }
     cout << endl << endl;
     
-    // ============ CPU ВЫЧИСЛЕНИЯ ============
     
-    cout << "========================================" << endl;
     cout << " CPU" << endl;
-    cout << "========================================" << endl;
     
     // замеряем время CPU
     auto cpuStart = high_resolution_clock::now();
@@ -114,11 +104,8 @@ int main() {
     cout << "  result: " << fixed << setprecision(2) << cpuSum << endl;
     cout << "  time: " << fixed << setprecision(4) << cpuTime.count() << " ms" << endl << endl;
     
-    // ============ GPU ВЫЧИСЛЕНИЯ ============
     
-    cout << "========================================" << endl;
     cout << " cuda global memory" << endl;
-    cout << "========================================" << endl;
     
     // конфигурация запуска
     int blockSize = 256;  // потоков в блоке
